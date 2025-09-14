@@ -1,0 +1,38 @@
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories (future-proof)
+node_modules/
+
+# Build outputs (future-proof)
+dist/
+build/
+.tmp/
+.cache/
+
+# Environment files
+.env
+.env.*
+*.local
+
+# Editors/IDE
+.vscode/
+.idea/
+*.swp
+
+# Coverage / test outputs
+coverage/
+*.coverage
+
+# Misc
+*.orig
+*.rej

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#f4f1ff" />
+  <title>Clay Draw — PWA</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <img src="./icons/icon-192.svg" alt="Clay Draw" />
+      <h1>Clay Draw</h1>
+    </div>
+    <div class="toolbar" id="toolbar">
+      <div class="tool-group">
+        <button data-tool="select" title="Select (V)">Select</button>
+        <button data-tool="pan" title="Pan (Space)">Pan</button>
+        <button data-tool="pencil" title="Pencil (P)">Pencil</button>
+        <button data-tool="brush" title="Brush (B)">Brush</button>
+        <button data-tool="eraser" title="Eraser (E)">Eraser</button>
+        <button data-tool="rect" title="Rectangle (R)">Rect</button>
+        <button data-tool="circle" title="Circle (C)">Circle</button>
+        <button data-tool="text" title="Text (T)">Text</button>
+      </div>
+      <div class="tool-group">
+        <input type="color" id="colorPicker" title="Color" />
+        <input type="range" id="sizePicker" min="1" max="64" step="1" value="4" title="Size"/>
+        <select id="blendMode" title="Layer Blend Mode">
+          <option>source-over</option>
+          <option>multiply</option>
+          <option>screen</option>
+          <option>overlay</option>
+          <option>darken</option>
+          <option>lighten</option>
+          <option>color-dodge</option>
+          <option>color-burn</option>
+          <option>hard-light</option>
+          <option>soft-light</option>
+          <option>difference</option>
+          <option>exclusion</option>
+        </select>
+        <input type="range" id="layerOpacity" min="0" max="1" step="0.05" value="1" title="Layer Opacity"/>
+      </div>
+      <div class="tool-group">
+        <button id="undoBtn" title="Undo (Ctrl+Z)">Undo</button>
+        <button id="redoBtn" title="Redo (Ctrl+Y)">Redo</button>
+        <button id="rotateBtn" title="Rotate Canvas 90° (Shift+R)">Rotate</button>
+        <button id="resizeBtn" title="Resize Canvas">Resize</button>
+      </div>
+      <div class="tool-group">
+        <button id="importBtn" title="Import Image/SVG (Ctrl+O)">Import</button>
+        <button id="exportPNGBtn" title="Export PNG (Ctrl+S)">PNG</button>
+        <button id="exportJPGBtn" title="Export JPG">JPG</button>
+        <button id="exportSVGBtn" title="Export SVG">SVG</button>
+      </div>
+      <div class="tool-group">
+        <button id="installBtn" class="accent">Install</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <aside class="layers-panel" id="layersPanel">
+      <div class="panel-header">
+        <h2>Layers</h2>
+        <button id="addLayerBtn">+ Layer</button>
+      </div>
+      <ul id="layersList"></ul>
+    </aside>
+
+    <section class="canvas-wrap">
+      <div class="canvas-toolbar">
+        <div class="zoom-controls">
+          <button id="zoomOut">−</button>
+          <span id="zoomLabel">100%</span>
+          <button id="zoomIn">+</button>
+          <button id="resetView">Reset View</button>
+        </div>
+      </div>
+      <div class="canvas-stage" id="stage">
+        <canvas id="drawCanvas"></canvas>
+        <canvas id="overlayCanvas"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <section class="time-cards">
+      <div class="time-header">
+        <h3>World Clock</h3>
+        <div class="time-actions">
+          <button id="addTimezoneBtn">Add Timezone</button>
+          <button id="listZonesBtn">Browse All</button>
+        </div>
+      </div>
+      <div class="cards-scroll" id="timeCards"></div>
+    </section>
+
+    <section class="social">
+      <a href="https://www.facebook.com/moody.uthuman" target="_blank" aria-label="Facebook" class="social-btn fb"></a>
+      <a href="https://www.instagram.com/uthuman.co" target="_blank" aria-label="Instagram" class="social-btn ig"></a>
+      <a href="https://t.me/uthuman" target="_blank" aria-label="Telegram" class="social-btn tg"></a>
+      <a href="https://x.com/uthumanco" target="_blank" aria-label="X" class="social-btn x"></a>
+      <a href="https://wa.me/256705126287" target="_blank" aria-label="WhatsApp" class="social-btn wa"></a>
+      <a href="mailto:developer@cttrack.com" aria-label="Email" class="social-btn mail"></a>
+      <a href="https://discord.com/channels/@ctwatch" target="_blank" aria-label="Discord" class="social-btn disc"></a>
+      <a href="https://github.com/uthy-inc" target="_blank" aria-label="GitHub" class="social-btn gh"></a>
+    </section>
+
+    <section class="legal">
+      <p>Designed by Uthuman & Co. · Free for use worldwide. Open source.</p>
+      <p>Copyright Uthuman & Co. 
+        <span class="tick" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 256 256" aria-hidden="true"><g transform="scale(2.81)"><path d="M 49.66 1.125 L 49.66 1.125 c 4.67 -2.393 10.394 -0.859 13.243 3.548 l 0 0 c 1.784 2.761 4.788 4.495 8.071 4.66 l 0 0 c 5.241 0.263 9.431 4.453 9.694 9.694 v 0 c 0.165 3.283 1.899 6.286 4.66 8.071 l 0 0 c 4.407 2.848 5.941 8.572 3.548 13.242 l 0 0 c -1.499 2.926 -1.499 6.394 0 9.319 l 0 0 c 2.393 4.67 0.859 10.394 -3.548 13.242 l 0 0 c -2.761 1.784 -4.495 4.788 -4.66 8.071 v 0 c -0.263 5.241 -4.453 9.431 -9.694 9.694 h 0 c -3.283 0.165 -6.286 1.899 -8.071 4.66 l 0 0 c -2.848 4.407 -8.572 5.941 -13.242 3.548 l 0 0 c -2.926 -1.499 -6.394 -1.499 -9.319 0 l 0 0 c -4.67 2.393 -10.394 0.859 -13.242 -3.548 l 0 0 c -1.784 -2.761 -4.788 -4.495 -8.071 -4.66 h 0 c -5.241 -0.263 -9.431 -4.453 -9.694 -9.694 l 0 0 c -0.165 -3.283 -1.899 -6.286 -4.66 -8.071 l 0 0 C 0.266 60.054 -1.267 54.33 1.125 49.66 l 0 0 c 1.499 -2.926 1.499 -6.394 0 -9.319 l 0 0 c -2.393 -4.67 -0.859 -10.394 3.548 -13.242 l 0 0 c 2.761 -1.784 4.495 -4.788 4.66 -8.071 l 0 0 c 0.263 -5.241 4.453 -9.431 9.694 -9.694 l 0 0 c 3.283 -0.165 6.286 -1.899 8.071 -4.66 l 0 0 c 2.848 -4.407 8.572 -5.941 13.242 -3.548 l 0 0 C 43.266 2.624 46.734 2.624 49.66 1.125 z" fill="#ce0000"/><polygon points="36.94,66.3 36.94,66.3 36.94,46.9 36.94,46.9 62.8,35.34 72.5,45.04 " fill="#b20000"/><polygon points="36.94,66.3 17.5,46.87 27.2,37.16 36.94,46.9 60.11,23.7 69.81,33.39 " fill="#fff"/></g></svg>
+        </span>
+        , 2025. All rights reserved.</p>
+    </section>
+  </footer>
+
+  <div class="modal" id="zonesModal" hidden>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>All Timezones</h3>
+        <button id="closeZones">Close</button>
+      </div>
+      <input type="search" id="zoneSearch" placeholder="Search timezone (e.g., Europe/Paris)" />
+      <div class="zones-list" id="zonesList" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <input type="file" id="fileInput" accept="image/png,image/jpeg,image/svg+xml" hidden />
+
+  <noscript>Please enable JavaScript to use this app.</noscript>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
