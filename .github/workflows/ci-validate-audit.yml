@@ -1,0 +1,43 @@
+name: Validate & Audit (PR)
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  htmlvalidate:
+    name: HTML validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install html-validate
+        run: npm i -g html-validate
+      - name: Run html-validate
+        run: html-validate "**/*.html"
+
+  lighthouse:
+    name: Lighthouse performance audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Lighthouse CI
+        run: npm i -g @lhci/cli@0.12.x
+      - name: Start static server
+        run: npx serve -l 5173 . &
+      - name: Wait for server
+        run: npx wait-on http://localhost:5173
+      - name: Run Lighthouse (LHCI)
+        run: |
+          lhci collect --url=http://localhost:5173 --numberOfRuns=1
+          lhci assert --assertions.performance.minScore=0.9 --assertions.pwa.minScore=0.9 --assertions.seo.minScore=0.9 --assertions.best-practices.minScore=0.9

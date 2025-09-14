@@ -14,8 +14,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  precheck:
+    name: Pre-deploy checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install tools
+        run: |
+          npm i -g html-validate @lhci/cli@0.12.x serve wait-on
+      - name: HTML validation
+        run: html-validate "**/*.html"
+      - name: Start static server
+        run: npx serve -l 5173 . &
+      - name: Wait for server
+        run: npx wait-on http://localhost:5173
+      - name: Lighthouse assert
+        run: |
+          lhci collect --url=http://localhost:5173 --numberOfRuns=1
+          lhci assert --assertions.performance.minScore=0.9 --assertions.pwa.minScore=0.9 --assertions.seo.minScore=0.9 --assertions.best-practices.minScore=0.9
+
   build:
     runs-on: ubuntu-latest
+    needs: precheck
     steps:
       - name: Checkout
         uses: actions/checkout@v4

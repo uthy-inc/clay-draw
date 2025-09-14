@@ -1,5 +1,7 @@
 # Clay Draw — Claymorphic Canvas PWA
 
+[![Deploy to GitHub Pages](https://github.com/uthy-inc/clay-draw/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/uthy-inc/clay-draw/actions/workflows/deploy-pages.yml)
+
 Live Preview
 - Launch the app: https://uthy-inc.github.io/clay-draw/
 - First deployment may take 1–2 minutes after a push to main. If you see a 404, wait a bit and refresh.
