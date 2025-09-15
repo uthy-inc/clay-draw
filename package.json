@@ -1,0 +1,11 @@
+{
+  "name": "clay-draw",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "playwright": "^1.47.0"
+  },
+  "scripts": {
+    "snapshots": "node scripts/snapshots.js"
+  }
+}

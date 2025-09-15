@@ -1,0 +1,39 @@
+name: PR Visual Snapshots
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  snapshots:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Start static server
+        run: |
+          python -m http.server 5173 &
+          sleep 2
+
+      - name: Generate screenshots
+        run: npm run snapshots
+        env:
+          BASE_URL: http://localhost:5173/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-snapshots
+          path: artifacts/screenshots/**

@@ -15,8 +15,8 @@
       <img src="./icons/icon-192.svg" alt="Clay Draw" />
       <h1>Clay Draw</h1>
     </div>
-    <div class="toolbar" id="toolbar">
-      <div class="tool-group">
+    <div class="toolbar" id="toolbar" role="toolbar" aria-label="Drawing tools and actions">
+      <div class="tool-group" role="group" aria-label="Selection and drawing tools">
         <button data-tool="select" title="Select (V)">Select</button>
         <button data-tool="pan" title="Pan (Space)">Pan</button>
         <button data-tool="pencil" title="Pencil (P)">Pencil</button>
@@ -26,10 +26,10 @@
         <button data-tool="circle" title="Circle (C)">Circle</button>
         <button data-tool="text" title="Text (T)">Text</button>
       </div>
-      <div class="tool-group">
-        <input type="color" id="colorPicker" title="Color" />
-        <input type="range" id="sizePicker" min="1" max="64" step="1" value="4" title="Size"/>
-        <select id="blendMode" title="Layer Blend Mode">
+      <div class="tool-group" role="group" aria-label="Appearance and layer settings">
+        <input type="color" id="colorPicker" title="Color" aria-label="Color picker" />
+        <input type="range" id="sizePicker" min="1" max="64" step="1" value="4" title="Size" aria-label="Brush size"/>
+        <select id="blendMode" title="Layer Blend Mode" aria-label="Layer blend mode">
           <option>source-over</option>
           <option>multiply</option>
           <option>screen</option>
@@ -43,42 +43,42 @@
           <option>difference</option>
           <option>exclusion</option>
         </select>
-        <input type="range" id="layerOpacity" min="0" max="1" step="0.05" value="1" title="Layer Opacity"/>
+        <input type="range" id="layerOpacity" min="0" max="1" step="0.05" value="1" title="Layer Opacity" aria-label="Layer opacity"/>
       </div>
-      <div class="tool-group">
-        <button id="undoBtn" title="Undo (Ctrl+Z)">Undo</button>
-        <button id="redoBtn" title="Redo (Ctrl+Y)">Redo</button>
-        <button id="rotateBtn" title="Rotate Canvas 90° (Shift+R)">Rotate</button>
-        <button id="resizeBtn" title="Resize Canvas">Resize</button>
+      <div class="tool-group" role="group" aria-label="History and canvas actions">
+        <button id="undoBtn" title="Undo (Ctrl+Z)" aria-label="Undo">Undo</button>
+        <button id="redoBtn" title="Redo (Ctrl+Y)" aria-label="Redo">Redo</button>
+        <button id="rotateBtn" title="Rotate Canvas 90° (Shift+R)" aria-label="Rotate canvas 90 degrees">Rotate</button>
+        <button id="resizeBtn" title="Resize Canvas" aria-label="Resize canvas">Resize</button>
       </div>
-      <div class="tool-group">
-        <button id="importBtn" title="Import Image/SVG (Ctrl+O)">Import</button>
-        <button id="exportPNGBtn" title="Export PNG (Ctrl+S)">PNG</button>
-        <button id="exportJPGBtn" title="Export JPG">JPG</button>
-        <button id="exportSVGBtn" title="Export SVG">SVG</button>
+      <div class="tool-group" role="group" aria-label="Import and export">
+        <button id="importBtn" title="Import Image/SVG (Ctrl+O)" aria-label="Import image or SVG">Import</button>
+        <button id="exportPNGBtn" title="Export PNG (Ctrl+S)" aria-label="Export PNG">PNG</button>
+        <button id="exportJPGBtn" title="Export JPG" aria-label="Export JPG">JPG</button>
+        <button id="exportSVGBtn" title="Export SVG" aria-label="Export SVG">SVG</button>
       </div>
-      <div class="tool-group">
-        <button id="installBtn" class="accent">Install</button>
+      <div class="tool-group" role="group" aria-label="App install">
+        <button id="installBtn" class="accent" aria-label="Install application">Install</button>
       </div>
     </div>
   </header>
 
   <main class="app-main">
-    <aside class="layers-panel" id="layersPanel">
+    <aside class="layers-panel" id="layersPanel" aria-label="Layers panel">
       <div class="panel-header">
         <h2>Layers</h2>
-        <button id="addLayerBtn">+ Layer</button>
+        <button id="addLayerBtn" aria-label="Add new layer">+ Layer</button>
       </div>
       <ul id="layersList"></ul>
     </aside>
 
     <section class="canvas-wrap">
       <div class="canvas-toolbar">
-        <div class="zoom-controls">
-          <button id="zoomOut">−</button>
-          <span id="zoomLabel">100%</span>
-          <button id="zoomIn">+</button>
-          <button id="resetView">Reset View</button>
+        <div class="zoom-controls" role="group" aria-label="Zoom controls">
+          <button id="zoomOut" aria-label="Zoom out">−</button>
+          <span id="zoomLabel" aria-live="polite">100%</span>
+          <button id="zoomIn" aria-label="Zoom in">+</button>
+          <button id="resetView" aria-label="Reset view">Reset View</button>
         </div>
       </div>
       <div class="canvas-stage" id="stage">
@@ -93,22 +93,22 @@
       <div class="time-header">
         <h3>World Clock</h3>
         <div class="time-actions">
-          <button id="addTimezoneBtn">Add Timezone</button>
-          <button id="listZonesBtn">Browse All</button>
+          <button id="addTimezoneBtn" aria-label="Add timezone">Add Timezone</button>
+          <button id="listZonesBtn" aria-label="Browse all timezones">Browse All</button>
         </div>
       </div>
       <div class="cards-scroll" id="timeCards"></div>
     </section>
 
     <section class="social">
-      <a href="https://www.facebook.com/moody.uthuman" target="_blank" aria-label="Facebook" class="social-btn fb"></a>
-      <a href="https://www.instagram.com/uthuman.co" target="_blank" aria-label="Instagram" class="social-btn ig"></a>
-      <a href="https://t.me/uthuman" target="_blank" aria-label="Telegram" class="social-btn tg"></a>
-      <a href="https://x.com/uthumanco" target="_blank" aria-label="X" class="social-btn x"></a>
-      <a href="https://wa.me/256705126287" target="_blank" aria-label="WhatsApp" class="social-btn wa"></a>
+      <a href="https://www.facebook.com/moody.uthuman" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-btn fb"></a>
+      <a href="https://www.instagram.com/uthuman.co" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-btn ig"></a>
+      <a href="https://t.me/uthuman" target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="social-btn tg"></a>
+      <a href="https://x.com/uthumanco" target="_blank" rel="noopener noreferrer" aria-label="X" class="social-btn x"></a>
+      <a href="https://wa.me/256705126287" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-btn wa"></a>
       <a href="mailto:developer@cttrack.com" aria-label="Email" class="social-btn mail"></a>
-      <a href="https://discord.com/channels/@ctwatch" target="_blank" aria-label="Discord" class="social-btn disc"></a>
-      <a href="https://github.com/uthy-inc" target="_blank" aria-label="GitHub" class="social-btn gh"></a>
+      <a href="https://discord.com/channels/@ctwatch" target="_blank" rel="noopener noreferrer" aria-label="Discord" class="social-btn disc"></a>
+      <a href="https://github.com/uthy-inc" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-btn gh"></a>
     </section>
 
     <section class="legal">
@@ -125,9 +125,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h3>All Timezones</h3>
-        <button id="closeZones">Close</button>
+        <button id="closeZones" aria-label="Close modal">Close</button>
       </div>
-      <input type="search" id="zoneSearch" placeholder="Search timezone (e.g., Europe/Paris)" />
+      <input type="search" id="zoneSearch" placeholder="Search timezone (e.g., Europe/Paris)" aria-label="Search timezones" />
       <div class="zones-list" id="zonesList" aria-live="polite"></div>
     </div>
   </div>
