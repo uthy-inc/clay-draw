@@ -9,6 +9,7 @@ const ASSETS = [
   './js/canvasEngine.js',
   './js/tools.js',
   './js/history.js',
+  './js/colors.js',
   './js/pwa.js',
   './js/timezones.js',
   './icons/icon-192.svg',
